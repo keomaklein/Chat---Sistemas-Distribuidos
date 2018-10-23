@@ -3,37 +3,43 @@ var banco = require('../mock/banco');
 var mensagem = require('../models/mensagem');
 
 function Mensagem() {
+  var data = new Date();
+
 	this.id = 0;
   this.id_usuario_rem =  0;
   this.id_usuario_dest =  0;
 	this.texto =  '';
 	this.status =  0; // 0 não visualizada, 1 visualizada;
-	this.data_envio =  new Date();
-	this.data_visualizada =  new Date();
+	this.data_envio = data.toLocaleString("pt");
+	this.data_visualizada = data.toLocaleString("pt");
 };
 
 exports.criar_mensagem_chat = function(req, res) {
+  var data = new Date(); 
+
   var entrada = req.body;
   var msg = new Mensagem();
   msg.id_usuario_rem = entrada.id_usuario_rem,
   msg.id_usuario_dest = entrada.id_usuario_dest,
   msg.texto = entrada.mensagem,
   msg.status = 0, // 0 não visualizada, 1 visualizada
-  msg.data_envio = new Date();
-  msg.data_visualizada = new Date();
+  msg.data_envio = data.toLocaleString("pt");
+  msg.data_visualizada = data.toLocaleString("pt");
   banco.insereMensagem(msg)
   res.redirect('/chat/' + entrada.id_usuario_dest + '/' + entrada.id_usuario_rem);  
 };
 
 exports.criar_mensagem = function(req, res) {
+  var data = new Date();
+
   var entrada = req.body;
   var msg = new Mensagem();
   msg.id_usuario_rem = entrada.id_usuario_rem,
   msg.id_usuario_dest = entrada.id_usuario_dest,
   msg.texto = entrada.mensagem,
   msg.status = 0, // 0 não visualizada, 1 visualizada
-  msg.data_envio = new Date();
-  msg.data_visualizada = new Date();
+  msg.data_envio = data.toLocaleString("pt");
+  msg.data_visualizada = data.toLocaleString("pt");
   res.json(banco.insereMensagem(msg));  
 };
 

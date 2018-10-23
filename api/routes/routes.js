@@ -2,7 +2,6 @@
 module.exports = function(app) {
 var usuarioController = require('../controllers/usuarioController');
 var mensagemController = require('../controllers/mensagemController');
-// messages Routes
 
   app.route('/')
    .get(usuarioController.index);

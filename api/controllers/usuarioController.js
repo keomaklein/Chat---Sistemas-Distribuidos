@@ -8,23 +8,19 @@ function Usuario() {
 }
 
 exports.index = function(req, res) {
-  console.log('Sera');
   res.render('logar', {});
 }
 
 exports.logar = function(req, res) {
-  
   var usu = new Usuario(); 
   usu.nome = req.body.usuario;
 
   var usuario_existente = banco.consultaUsuarioNome(usu.nome);
-  console.log('usuario_existente', usuario_existente);
   if(!usuario_existente) {
     usu.id = banco.insereUsuario(usu);
   }else{
     usu = usuario_existente;
   }
-  console.log('usu', usu);
 
   var msg = banco.consultaOutrosUsuarios(usu.id);
   res.render('index', {'usuarios':msg, 'usuario_logado': usu});
@@ -37,7 +33,6 @@ exports.chat = function(req, res) {
   
   var usuario_logado = banco.consultaUsuario(id_usuario_rem);
   var usuario_dest = banco.consultaUsuario(id_usuario_dest);
-  console.log('usuario_logado', usuario_logado);
 
   var mensagens = banco.consultaMensagensUsuario(id_usuario_rem, id_usuario_dest);
 
